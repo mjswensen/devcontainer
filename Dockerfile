@@ -38,7 +38,8 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 # Make mise-managed tools available to interactive and non-interactive shells.
-ENV PATH="/home/${USERNAME}/.local/share/mise/shims:${PATH}"
+# Also add ~/.local/bin/ for generic user-installed executables.
+ENV PATH="/home/${USERNAME}/.local/share/mise/shims:/home/${USERNAME}/.local/bin:${PATH}"
 
 RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 
