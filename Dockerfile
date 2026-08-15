@@ -16,6 +16,7 @@ RUN apt-get update \
         git \
         openssh-client \
         sudo \
+        vim \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the development user with passwordless sudo.
@@ -40,6 +41,8 @@ WORKDIR /home/${USERNAME}
 # Make mise-managed tools available to interactive and non-interactive shells.
 # Also add ~/.local/bin/ for generic user-installed executables.
 ENV PATH="/home/${USERNAME}/.local/share/mise/shims:/home/${USERNAME}/.local/bin:${PATH}"
+
+ENV EDITOR="vim"
 
 RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 
