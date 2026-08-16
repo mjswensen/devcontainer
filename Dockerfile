@@ -18,6 +18,7 @@ RUN apt-get update \
         openssh-client \
         sudo \
         vim \
+        zsh \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the development user with passwordless sudo.
@@ -26,7 +27,7 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
         --uid "${USER_UID}" \
         --gid "${USER_GID}" \
         --create-home \
-        --shell /bin/bash \
+        --shell /usr/bin/zsh \
         "${USERNAME}" \
     && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" \
         > "/etc/sudoers.d/${USERNAME}" \
@@ -39,12 +40,16 @@ RUN curl -fsSL https://mise.run \
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
-# Make mise-managed tools available to interactive and non-interactive shells.
-# Also add ~/.local/bin/ for generic user-installed executables.
+# Make mise-managed tools available to both interactive and non-interactive
+# shells, but we won't bother with `mise activate` since dev conatiners are
+# project-specific. Also add ~/.local/bin/ for generic user-installed
+# executables.
 ENV PATH="/home/${USERNAME}/.local/share/mise/shims:/home/${USERNAME}/.local/bin:${PATH}"
 
 ENV EDITOR="vim"
 
-RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+RUN cat > ~/.zshrc <<'EOF'
+PROMPT='%F{cyan}%1~%f %F{green}❯%f '
+EOF
 
-CMD ["bash"]
+CMD ["zsh"]
