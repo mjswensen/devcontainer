@@ -49,7 +49,7 @@ ENV PATH="/home/${USERNAME}/.local/share/mise/shims:/home/${USERNAME}/.local/bin
 ENV EDITOR="vim"
 
 RUN cat > ~/.zshrc <<'EOF'
-PROMPT='%F{cyan}%1~%f %F{green}❯%f '
+PROMPT='%F{cyan}%/%f %F{green}❯%f '
 EOF
 
 CMD ["zsh"]
