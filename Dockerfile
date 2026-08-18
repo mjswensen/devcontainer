@@ -17,6 +17,7 @@ RUN apt-get update \
         git \
         openssh-client \
         sudo \
+        tmux \
         vim \
         zsh \
     && rm -rf /var/lib/apt/lists/*
