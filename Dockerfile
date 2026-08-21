@@ -68,8 +68,10 @@ ENV PATH="/home/${USERNAME}/.local/share/mise/shims:/home/${USERNAME}/.local/bin
 
 ENV EDITOR="vim"
 
+ENV TERM="xterm-256color"
+
 RUN cat > ~/.zshrc <<'EOF'
-PROMPT='%F{cyan}%/%f %F{green}❯%f '
+PROMPT="%F{012}%n%f %F{250}@%f %F{014}%m%f %F{013}%~%f %F{010}❯%f "
 EOF
 
 CMD ["zsh"]
