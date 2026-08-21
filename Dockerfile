@@ -14,11 +14,30 @@ RUN apt-get update \
         build-essential \
         ca-certificates \
         curl \
+        dnsutils \
+        fd-find \
+        file \
         git \
+        gzip \
+        htop \
+        iproute2 \
+        iputils-ping \
+        jq \
+        less \
+        netcat-openbsd \
         openssh-client \
+        pkg-config \
+        procps \
+        ripgrep \
         sudo \
+        tar \
         tmux \
+        tree \
+        unzip \
         vim \
+        wget \
+        xz-utils \
+        zip \
         zsh \
     && rm -rf /var/lib/apt/lists/*
 
